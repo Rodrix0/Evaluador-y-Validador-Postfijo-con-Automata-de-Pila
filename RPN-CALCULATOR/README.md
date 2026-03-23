@@ -168,6 +168,28 @@ Ejecuta el programa con un archivo de entrada:
   * `resultado_<nombre_archivo>.txt`: Resultado final o mensaje de error detallado
 * **Modo silencioso**: Solo muestra mensaje de confirmación al finalizar exitosamente
 
+### 4.1 Simulador web (interfaz gráfica)
+
+También puedes usar una interfaz moderna en navegador:
+
+**En Windows (CMD / PowerShell):**
+```PowerShell
+.\abrir_simulador_web.bat
+```
+
+También puedes abrir directamente:
+
+```text
+web/index.html
+```
+
+Incluye:
+- Validación APD pura (sin cálculo aritmético).
+- Visualización de pila con bloques `X` y tope resaltado.
+- Animaciones de `push` y `pop`.
+- Historial de pasos y modo paso a paso.
+- Tema claro/oscuro.
+
 ### 5. Limpieza (Opcional)
 
 Para eliminar los archivos objeto (`.o`) y el ejecutable generado:

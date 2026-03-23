@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador APD RPN</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-theme="dark">
+  <div class="app-shell">
+    <header class="app-header card">
+      <div>
+        <h1>Simulador de Autómata de Pila (APD)</h1>
+        <p>Validación estructural de expresiones en notación postfija (RPN)</p>
+      </div>
+      <button id="themeToggle" class="btn secondary">Tema claro/oscuro</button>
+    </header>
+
+    <main class="layout">
+      <section class="card controls">
+        <h2>Controles</h2>
+
+        <label for="expressionInput">Expresión RPN</label>
+        <input id="expressionInput" type="text" placeholder="Ej: 5 3 + 2 * =" autocomplete="off" />
+
+        <div class="switch-row">
+          <label class="switch-label">
+            <input id="stepMode" type="checkbox" />
+            Modo paso a paso
+          </label>
+        </div>
+
+        <div class="btn-row">
+          <button id="runBtn" class="btn primary">Ejecutar simulación</button>
+          <button id="nextBtn" class="btn warning" disabled>Siguiente</button>
+          <button id="resetBtn" class="btn secondary">Reiniciar</button>
+        </div>
+
+        <div class="status-wrap">
+          <span id="statusBadge" class="status processing">Procesando...</span>
+          <p id="errorMessage" class="error-text"></p>
+        </div>
+
+        <div class="rules">
+          <h3>Reglas del APD</h3>
+          <ul>
+            <li>Número → <strong>push(X)</strong></li>
+            <li>Operador → <strong>pop(X), pop(X), push(X)</strong></li>
+            <li>Acepta si al final queda exactamente un <strong>X</strong></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card stack-card">
+        <h2>Pila visual</h2>
+        <div class="stack-board" id="stackBoard">
+          <div class="top-indicator">TOPE</div>
+          <div id="stackColumn" class="stack-column"></div>
+          <div id="popGhost" class="pop-ghost" aria-hidden="true">X</div>
+        </div>
+      </section>
+
+      <section class="card history-card">
+        <h2>Historial de pasos</h2>
+        <ol id="historyList" class="history-list"></ol>
+      </section>
+    </main>
+
+    <footer class="app-footer card">
+      <p>Basado en el proyecto de Alexis Orlando Gonzales Hernandez, modificado por Rodrigo Magallanes</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
