@@ -1,0 +1,1 @@
+RECHAZADA: simbolo invalido '5+='.

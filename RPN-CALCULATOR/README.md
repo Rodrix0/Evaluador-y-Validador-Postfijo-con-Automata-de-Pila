@@ -1,6 +1,6 @@
-# 🧮 EVALUADOR Y VALIDADOR POSTFIJO
+# 🧮 AUTÓMATA DE PILA PURO PARA POSTFIJO
 
-> Una implementación robusta, modular y eficiente de una calculadora de **Notación Polaca Inversa (Reverse Polish Notation)** escrita en **C**.
+> Una implementación robusta, modular y eficiente de un **Autómata de Pila Determinista (APD)** para validar cadenas en **Notación Polaca Inversa (RPN)** escrita en **C**.
 
 ![Language](https://img.shields.io/badge/Lenguaje-C-00599C?style=flat-square&logo=c&logoColor=white)
 ![Build](https://img.shields.io/badge/Build-Make-orange?style=flat-square)
@@ -10,9 +10,9 @@
 
 ## 📖 Descripción
 
-Este proyecto consiste en un evaluador de expresiones matemáticas que utiliza una **pila (stack)** estática para procesar operaciones en tiempo real. A diferencia de las calculadoras tradicionales, el formato RPN elimina la necesidad de paréntesis, haciendo el cálculo computacionalmente más eficiente y lógico.
+Este proyecto consiste en un **reconocedor formal** de expresiones postfijas que utiliza una **pila (stack)** estática para validar la estructura sintáctica de la cadena.
 
-El sistema está diseñado para ser **versátil**, permitiendo al usuario trabajar tanto de forma interactiva (modo consola) como por lotes (modo archivo), generando siempre archivos de trazabilidad que registran cada paso de la evaluación.
+El sistema está diseñado para ser **versátil**, permitiendo al usuario trabajar tanto de forma interactiva (modo consola) como por lotes (modo archivo), generando siempre archivos de trazabilidad que registran cada paso del reconocimiento.
 
 ### 🔄 Autómata de Pila
 
@@ -25,27 +25,25 @@ El evaluador implementa un **Autómata de Pila Determinista (APD)** con las sigu
   * `d(q0, ε, Z0) = (q0, Z0)` - Inicialización
   * `d(q0, número, Z0) = (q0, X Z0)` - Primer número apilado
   * `d(q0, número, X) = (q0, XX)` - Apilar números subsecuentes
-  * `d(q0, operador, XX) = (q0, X)` - Desapilar 2, operar, apilar resultado
-  * `d(q0, ε, X Z0) = (q0, ε)` - Estado de aceptación (un solo resultado)
+  * `d(q0, operador, XX) = (q0, X)` - Desapilar 2 símbolos y apilar 1 símbolo
+  * `d(q0, ε, X Z0) = (q0, ε)` - Estado de aceptación
 
-**Condición de aceptación:** La pila debe contener exactamente un elemento al finalizar (el resultado).
+**Condición de aceptación:** La pila debe contener exactamente un símbolo `X` sobre `Z0` al finalizar.
 
 ## ✨ Características Principales
 
 * **Arquitectura Modular:** Código separado en lógica de pila (`stack`), utilidades (`utils`) y programa principal (`main`).
 * **Doble Modo de Operación:** Modo consola interactivo y modo archivo por lotes.
 * **Trazabilidad Completa:** Genera archivos de evolución mostrando el estado de la pila paso a paso con las **transiciones del autómata**.
-* **Formato Inteligente:** Muestra decimales solo cuando es necesario (ej: muestra `5` en lugar de `5.000000` y `2.5` si hay decimales).
 * **Manejo de Errores Estricto:** Sistema de validación que detecta y reporta:
-  * División por cero.
   * Desbordamiento de pila (Stack Overflow - máximo 100 elementos).
   * Símbolos inválidos (ej: letras mezcladas con números).
   * Insuficiencia de operandos.
-  * Expresión incompleta (sobran números en la pila).
+  * Expresión incompleta (sobran operandos en la pila).
   * Pila vacía al finalizar.
 * **Sistema de Archivos de Salida:** 
   * **`evolucion_<nombre>.txt`**: Trazabilidad completa paso a paso.
-  * **`resultado_<nombre>.txt`**: Resultado numérico o descripción detallada del error.
+  * **`resultado_<nombre>.txt`**: Veredicto de aceptación/rechazo y descripción del error (si aplica).
 
 ---
 
@@ -124,11 +122,11 @@ make
 
 ### 4. Ejecución
 
-Una vez compilado, se generará el ejecutable. El programa soporta **dos modos de operación**:
+Una vez compilado, se generará el ejecutable. El programa soporta **dos modos de operación** y una **interfaz visual por menú** cuando se ejecuta sin argumentos.
 
-**Modo Consola (Interactivo) - Sin argumentos:**
+**Interfaz visual (Menú) - Sin argumentos:**
 
-Ejecuta el programa sin argumentos para el modo interactivo token por token:
+Ejecuta el programa sin argumentos y elige una opción del menú:
 
 **En Linux / Mac / Git Bash:**
 ```bash
@@ -141,7 +139,8 @@ Ejecuta el programa sin argumentos para el modo interactivo token por token:
 ```
 
 * Permite ingresar tokens uno a uno (números y operadores)
-* **NO muestra la pila en pantalla durante la ejecución** (solo genera archivos)
+* Muestra la pila en vivo durante el modo consola interactivo
+* Opciones disponibles: modo consola, modo archivo, ayuda rápida y salir
 * Genera archivos de trazabilidad automáticamente con ID aleatorio:
   * `evolucion_manual_XXXX.txt`: Traza completa paso a paso con **transiciones del autómata**
   * `resultado_manual_XXXX.txt`: Resultado final o mensaje de error

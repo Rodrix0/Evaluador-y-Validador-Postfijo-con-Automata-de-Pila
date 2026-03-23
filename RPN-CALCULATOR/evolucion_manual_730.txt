@@ -1,0 +1,4 @@
+PASO | TRANSICION                          | DESCRIPCION               | PILA
+-----|-------------------------------------|---------------------------|------------------
+0    | d(q0, e, Z0) = (q0, Z0)             | INICIO                    | Z0 [ vacia ]
+1    | ERROR                               | Simbolo no reconocido     | ERROR: Token invalido

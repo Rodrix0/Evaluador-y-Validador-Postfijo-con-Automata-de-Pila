@@ -1,0 +1,9 @@
+PASO | TRANSICION                          | DESCRIPCION               | PILA
+-----|-------------------------------------|---------------------------|------------------
+0    | d(q0, e, Z0) = (q0, Z0)             | INICIO                    | Z0 [ vacia ]
+1    | d(q0, 5, Z0) = (q0, X Z0)           | TRANSICION DE OPERANDO    | Z0 [ X ]
+2    | d(q0, 3, X) = (q0, XX)              | TRANSICION DE OPERANDO    | Z0 [ X X ]
+3    | d(q0, +, XX) = (q0, X)              | TRANSICION DE OPERADOR    | Z0 [ X ]
+4    | d(q0, 2, X) = (q0, XX)              | TRANSICION DE OPERANDO    | Z0 [ X X ]
+5    | d(q0, *, XX) = (q0, X)              | TRANSICION DE OPERADOR    | Z0 [ X ]
+6    | d(q0, e, X Z0) = (q0, e)            | ACEPTACION                | Z0 [ X ]

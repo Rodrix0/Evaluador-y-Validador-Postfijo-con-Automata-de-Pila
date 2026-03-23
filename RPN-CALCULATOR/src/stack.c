@@ -33,8 +33,7 @@ void print_stack() {
         printf("vacia ");
     } else {
         for (int j = 0; j <= top; j++) {
-            print_formatted(stack[j]);
-            printf(" ");
+            printf("X ");
         }
     }
     printf("] <\n");
@@ -46,8 +45,7 @@ void print_stack_file(FILE *f) {
         fprintf(f, "vacia ");
     } else {
         for (int j = 0; j <= top; j++) {
-            print_formatted_file(f, stack[j]); 
-            fprintf(f, " ");
+            fprintf(f, "X ");
         }
     }
     fprintf(f, "]");
@@ -60,4 +58,8 @@ int get_stack_size() {
 double get_top_value() {
     if (top >= 0) return stack[top];
     return 0.0;
+}
+
+void reset_stack() {
+    top = -1;
 }
