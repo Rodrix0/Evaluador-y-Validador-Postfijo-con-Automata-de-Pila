@@ -64,6 +64,12 @@
         <h2>Historial de pasos</h2>
         <ol id="historyList" class="history-list"></ol>
       </section>
+
+      <section class="card graph-card">
+        <h2>Grafo del recorrido</h2>
+        <p id="graphHint" class="graph-hint">Ejecuta una cadena valida para generar el grafico del camino recorrido.</p>
+        <div id="graphContainer" class="graph-container"></div>
+      </section>
     </main>
 
     <footer class="app-footer card">
@@ -71,6 +77,7 @@
     </footer>
   </div>
 
+  <script src="https://unpkg.com/cytoscape@3.29.2/dist/cytoscape.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
